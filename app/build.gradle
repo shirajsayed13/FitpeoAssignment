@@ -1,10 +1,13 @@
 plugins {
     id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'dagger.hilt.android.plugin'
+    id 'kotlin-android'
     id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
 }
+
+apply from: '../dependencies.gradle'
 
 android {
     namespace 'com.shiraj.fitpeoassignment'
@@ -35,57 +38,58 @@ android {
     }
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
+}
+
+kapt {
+    correctErrorTypes true
 }
 
 dependencies {
 
+    implementation androidx.coreKtx
+    implementation androidx.appCompat
+    implementation androidx.constraintlayout
+    implementation androidx.lifecycleExt
+    implementation google.material
+
+    //Activity extension, referring with  "by viewModels"
+    implementation androidx.activityKtx
+
+    // LiveData
+    implementation androidx.lifecycleLiveData
+
+    // ViewModel
+    implementation androidx.lifecycleViewModel
+
+    // Navigation
+    implementation androidx.navigationFragment
+    implementation androidx.navigationUi
+
+    //DI Hilt
+    implementation hilt.hiltAndroid
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt hilt.kaptHiltAndroidCompiler
 
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.7.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-
-    // architecture components
-    implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1"
-    implementation "androidx.lifecycle:lifecycle-livedata:2.5.1"
-    implementation "androidx.lifecycle:lifecycle-runtime:2.5.1"
-
-    //fragment
-    implementation "androidx.fragment:fragment-ktx:1.5.5"
-
-    //navigation
-    implementation "androidx.navigation:navigation-runtime-ktx:2.5.3"
-    implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
-    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
-
-    //Dagger-Hilt
-    implementation "com.google.dagger:hilt-android:2.44"
-    kapt "com.google.dagger:hilt-compiler:2.44"
-    kapt "androidx.hilt:hilt-compiler:1.0.0"
-
-    //Paging
-    implementation "androidx.paging:paging-runtime:3.1.1"
-    implementation "androidx.paging:paging-runtime-ktx:3.1.1"
-
-    //Retrofit and Moshi
-    implementation "com.squareup.retrofit2:retrofit:2.9.0"
-    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
-    implementation "com.squareup.moshi:moshi:1.13.0"
-    implementation "com.squareup.moshi:moshi-kotlin:1.13.0"
+    //For Hilt support for ViewModel
+    implementation hilt.hiltViewModel
+    kapt hilt.kaptHiltCompiler
 
     //Picasso
-    implementation "com.squareup.picasso:picasso:2.8"
+    implementation image.picasso
 
-    //OkHttp
-    implementation "com.squareup.okhttp3:okhttp:4.10.0"
-    implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
+    //Coroutines
+    implementation kotlin.kotlinxCoroutines
 
-    //Preferences DataStore
-    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    // optional - Test helpers for LiveData
+    testImplementation testing.unitTestingCore
 
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    // Coroutine Testing
+    testImplementation testing.unitTestingCoroutines
+    testImplementation testing.unitTestingMockitoCore
+
+    testImplementation testing.unitTestingJunit
+    androidTestImplementation testing.uiTestingJunit
+    androidTestImplementation testing.uiTestingEspresso
 }
