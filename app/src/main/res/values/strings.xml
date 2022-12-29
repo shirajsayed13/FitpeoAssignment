@@ -2,4 +2,7 @@
     <string name="app_name">FitpeoAssignment</string>
     <string name="message_event_no_internet">No internet</string>
     <string name="message_event_generic">Something wrong happened. Please try again</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="not_found">Photos Not Found</string>
 </resources>
