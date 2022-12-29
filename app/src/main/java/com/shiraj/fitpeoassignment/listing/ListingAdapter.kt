@@ -1,4 +1,4 @@
-package com.shiraj.fitpeoassignment.home
+package com.shiraj.fitpeoassignment.listing
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

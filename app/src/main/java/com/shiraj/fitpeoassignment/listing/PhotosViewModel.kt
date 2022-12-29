@@ -1,4 +1,4 @@
-package com.shiraj.fitpeoassignment.home
+package com.shiraj.fitpeoassignment.listing
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
