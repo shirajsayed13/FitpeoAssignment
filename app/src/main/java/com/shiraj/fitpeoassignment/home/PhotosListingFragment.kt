@@ -36,11 +36,14 @@ class PhotosListingFragment : BaseFragment() {
     override fun subscribeUI() {
         viewModel.fetchPhotos()
         binding.apply {
+            rvPhotos.setHasFixedSize(true)
+            rvPhotos.setItemViewCacheSize(20)
             rvPhotos.adapter = listingAdapter
         }
         setUpPhotosObserver()
         listingAdapter.onPhotoClickListener = { photo ->
-            val action = PhotosListingFragmentDirections.actionPhotosListingFragmentToDetailFragment(photo)
+            val action = PhotosListingFragmentDirections
+                .actionPhotosListingFragmentToDetailFragment(photo)
             findNavController().navigate(action)
         }
     }
